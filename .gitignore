@@ -1,0 +1,9 @@
+# Ignore Python cache
+__pycache__/
+
+# Ignore virtual environment folder
+myenv/
+
+# Ignore model weight files (shared via external links)
+*.pth
+*.pt
