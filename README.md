@@ -47,21 +47,11 @@ Include a few images in the `/Gallery` folder to test the app.
    streamlit run app.py
    
 ## Future Work
-Improve model accuracy via further fine-tuning and data augmentation
+-Improve model accuracy via further fine-tuning and data augmentation
 
-Enhance YOLO integration for better real-time detection
+-Enhance YOLO integration for better real-time detection
 
-Support additional datasets and camera views
+-Support additional datasets and camera views
 
-Explore deployment optimizations for speed and scalability
+-Explore deployment optimizations for speed and scalability
 
-## References
-TransReID: Transformer-based Person Re-Identification
-
-Market-1501 Dataset
-
-YOLOv8: Ultralytics YOLO
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-  
