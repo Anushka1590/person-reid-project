@@ -22,6 +22,23 @@ The system includes a user-friendly Streamlit interface for real-time querying a
 
 ---
 
+## Streamlit UI
+
+<img width="1861" height="717" alt="Screenshot 2025-04-25 022413" src="https://github.com/user-attachments/assets/73fd4e1e-de35-4f1c-95f8-1071786b4dbf" />
+
+Upload Image:
+<img width="1904" height="853" alt="Screenshot 2025-04-20 010015" src="https://github.com/user-attachments/assets/059f0b91-47b6-471c-ae65-1ee4e128becf" />
+
+Top matches displayed:
+<img width="1891" height="833" alt="Screenshot 2025-04-20 012034" src="https://github.com/user-attachments/assets/2567be0f-2dc4-4f1b-9973-dd9aac8d4ae1" />
+
+Confidence Percentage:
+<img width="1863" height="360" alt="Screenshot 2025-04-20 012045" src="https://github.com/user-attachments/assets/b54648a9-c0ef-48d7-b7cd-7054837258aa" />
+
+
+
+
+
 ## Current Status & Limitations
 
 > ⚠️ **Note:** This is a research/demo project. The model currently achieves moderate accuracy on Market-1501 and may not perform reliably in all scenarios such as heavy occlusions, varying lighting, or low-resolution images. It is not production-ready and intended for demonstration and experimentation purposes.
