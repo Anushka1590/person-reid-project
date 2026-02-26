@@ -1,24 +1,28 @@
 # Person Re-Identification System
 
-A Vision Transformer-based Person Re-Identification (ReID) system with a Streamlit interface and cosine similarity matching using the Market-1501 dataset.
+A real-time Person Re-Identification system using a Vision Transformer (ViT) backbone, YOLOv8 for person detection, and cosine similarity-based retrieval. Deployed via Streamlit for live querying.
 
 ---
 
 ## Overview
 
-Person Re-Identification is a challenging computer vision task that aims to recognize the same individual across different camera views. This project leverages a fine-tuned Vision Transformer (TransReID) model to address this challenge by extracting robust feature embeddings and performing cosine similarity matching via FAISS for efficient retrieval.
+Person Re-Identification (ReID) aims to recognize the same individual across different camera views. This project leverages a fine-tuned Vision Transformer (TransReID) model trained on the Market-1501 dataset to extract robust 768-dimensional feature embeddings. Embeddings are compared via cosine similarity to retrieve the most similar identities.
 
-The system includes a user-friendly Streamlit interface for real-time querying and optional integration with YOLO for person detection.
+A YOLOv8 person detector is used to crop input images for better embedding quality, and the system supports a Streamlit interface for real-time querying.
 
 ---
 
-## Features
+## Key Features
 
-- Person ReID using Vision Transformer (TransReID)  
-- Cosine similarity-based feature matching using FAISS  
-- Real-time querying via Streamlit UI  
-- Tested on Market-1501 dataset  
-- Optional YOLO integration for person detection  
+- Vision Transformer (vit_base_patch16_224) backbone for feature extraction
+
+- YOLOv8-based person detection for clean input
+
+- Cosine similarity matching for retrieval
+
+- Real-time querying using Streamlit
+
+- Custom gallery support (images of multiple identities with varying camera angles)
 
 ---
 
@@ -35,38 +39,69 @@ Top matches displayed:
 Confidence Percentage:
 <img width="1863" height="360" alt="Screenshot 2025-04-20 012045" src="https://github.com/user-attachments/assets/b54648a9-c0ef-48d7-b7cd-7054837258aa" />
 
+---
 
+## Pipeline Diagram
 
-
-
-## Current Status & Limitations
-
-> ⚠️ **Note:** This is a research/demo project. The model currently achieves moderate accuracy on Market-1501 and may not perform reliably in all scenarios such as heavy occlusions, varying lighting, or low-resolution images. It is not production-ready and intended for demonstration and experimentation purposes.
+Input Image
+    ↓
+YOLOv8 → Crop Person
+    ↓
+ViT (TransReID) → 768-dim Feature Embedding
+    ↓
+Cosine Similarity with Gallery Embeddings
+    ↓
+Top-K Similar Persons
+    ↓
+Streamlit Display
 
 ---
 
-## How to Run
-1. Clone the repository
+## Installation & Usage
 
-2. Install dependencies:
-   pip install -r requirements.txt
-   
-3. Model Weights
-Download model weights from the links below and place them in the root project directory:
+# Clone repo
+git clone <repo_url>
+cd person-reid-system
 
-- [person_reid_model.pth](https://drive.google.com/file/d/18W_RWaVadFBlojRKBljXrZtDKp3WKXKt/view?usp=sharing)
-- [yolov8n.pt](https://drive.google.com/file/d/1d8Q_Iiyt-UFsTfZXkXsnZ99TW1MyWQ_v/view?usp=sharing)
-  
-4. Sample Gallery
-Include a few images in the `/Gallery` folder to test the app.
+# Install dependencies
+pip install -r requirements.txt
 
-5. Run the app:
-   streamlit run app.py
+# Place model weights in root
+person_reid_model.pth
+yolov8n.pt
+
+# Run Streamlit app
+streamlit run app.py
+
+---
+
+## Results & Performance
+
+- Tested on custom gallery of 10 identities, 10-15 images each
+
+- Rank-1 similarity matching: ✅ correctly identifies top match in most cases
+
+- Provides confidence scores for retrieved images
+
+# Note: Moderate accuracy; performance varies with occlusion, lighting, and low-resolution images.
+
+---
+
+## Limitations
+
+- Not production-ready
+
+- Accuracy can drop in complex real-world scenarios
+
+- Currently limited to Market-1501-trained embeddings
+
+---
    
 ## Future Work
+
 - Improve model accuracy via further fine-tuning and data augmentation
 
-- Enhance YOLO integration for better real-time detection
+- Enhance YOLO integration for multi-person detection
 
 - Support additional datasets and camera views
 
