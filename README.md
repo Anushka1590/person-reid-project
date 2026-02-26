@@ -44,33 +44,33 @@ Confidence Percentage:
 ## Pipeline Diagram
 
 Input Image
-    ↓
+↓
 YOLOv8 → Crop Person
-    ↓
+↓
 ViT (TransReID) → 768-dim Feature Embedding
-    ↓
+↓
 Cosine Similarity with Gallery Embeddings
-    ↓
+↓
 Top-K Similar Persons
-    ↓
+↓
 Streamlit Display
 
 ---
 
 ## Installation & Usage
 
-# Clone repo
+### Clone repo
 git clone <repo_url>
 cd person-reid-system
 
-# Install dependencies
+### Install dependencies
 pip install -r requirements.txt
 
-# Place model weights in root
+### Place model weights in root
 person_reid_model.pth
 yolov8n.pt
 
-# Run Streamlit app
+### Run Streamlit app
 streamlit run app.py
 
 ---
@@ -79,11 +79,11 @@ streamlit run app.py
 
 - Tested on custom gallery of 10 identities, 10-15 images each
 
-- Rank-1 similarity matching: ✅ correctly identifies top match in most cases
+- Rank-1 similarity matching: correctly identifies top match in most cases
 
 - Provides confidence scores for retrieved images
 
-# Note: Moderate accuracy; performance varies with occlusion, lighting, and low-resolution images.
+#### Note: Moderate accuracy; performance varies with occlusion, lighting, and low-resolution images.
 
 ---
 
