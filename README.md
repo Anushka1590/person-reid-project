@@ -42,7 +42,7 @@ Confidence Percentage:
 ---
 
 ## Pipeline Diagram
-
+"""
 Input Image
     ↓
 YOLOv8 → Crop Person
@@ -54,7 +54,7 @@ Cosine Similarity with Gallery Embeddings
 Top-K Similar Persons
     ↓
 Streamlit Display
-
+"""
 ---
 
 ## Installation & Usage
