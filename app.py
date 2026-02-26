@@ -43,6 +43,19 @@ for filename in os.listdir(gallery_folder):
 
 gallery_features = torch.stack(gallery_features).numpy()
 
+###### Faiss
+import faiss
+
+# Convert features to float32 (required by FAISS)
+gallery_features_np = gallery_features.astype('float32')
+
+# Normalize embeddings for cosine similarity
+faiss.normalize_L2(gallery_features_np)
+
+# Create FAISS index
+index = faiss.IndexFlatIP(gallery_features_np.shape[1])  # IP = inner product = cosine after normalization
+index.add(gallery_features_np)
+
 # Function to get Top-N matches with confidence scores
 def get_top_n_matches(query_feat, gallery_feats, gallery_paths, N=3):
     similarities = cosine_similarity(query_feat.reshape(1, -1), gallery_feats).flatten()
@@ -70,18 +83,24 @@ if uploaded_file:
     st.image(cropped_query, caption="Detected Person", width=300)
 
 # Function to get Top-N matches with confidence threshold
-def get_top_n_matches(query_feat, gallery_feats, gallery_paths, N=3, threshold=0.7):
-    similarities = cosine_similarity(query_feat.reshape(1, -1), gallery_feats).flatten()
-    top_indices = similarities.argsort()[::-1]  # Sort by descending similarity
+def get_top_n_matches_faiss(query_feat, gallery_paths, N=3, threshold=0.7):
+    """
+    query_feat: numpy array of shape (feat_dim,)
+    gallery_paths: list of filenames
+    N: top-N matches
+    threshold: minimum similarity score to accept
+    """
+    query_np = query_feat.astype('float32').reshape(1, -1)
+    faiss.normalize_L2(query_np)
+
+    # Search in FAISS index
+    D, I = index.search(query_np, N)  # D = similarity scores, I = indices
+
     top_matches = []
-
-    for idx in top_indices:
-        if similarities[idx] >= threshold:
-            top_matches.append((gallery_paths[idx], similarities[idx]))
-        if len(top_matches) >= N:
-            break
-
-    return top_matches  # Ensure to return the matches
+    for score, idx in zip(D[0], I[0]):
+        if score >= threshold:
+            top_matches.append((gallery_paths[idx], score))
+    return top_matches
 
 # On upload
 if uploaded_file:
@@ -91,8 +110,8 @@ if uploaded_file:
     st.subheader("🔍 Query Image")
     st.image(cropped_query, caption="Detected Person", width=300)
 
-    # Get Top-N matches
-    top_n_matches = get_top_n_matches(query_features_np, gallery_features, gallery_filenames, N=3, threshold=0.7)
+    # New (FAISS)
+    top_n_matches = get_top_n_matches_faiss(query_features_np, gallery_filenames, N=3, threshold=0.7)
 
     if top_n_matches:
         st.subheader("🎯 Top Matches from Gallery")
