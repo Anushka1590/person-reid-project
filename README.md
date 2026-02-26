@@ -1,6 +1,6 @@
 # Person Re-Identification System
 
-A real-time Person Re-Identification system using a Vision Transformer (ViT) backbone, YOLOv8 for person detection, and cosine similarity-based retrieval, and FAISS for fast cosine similarity-based retrieval. Deployed via Streamlit for live querying.
+A real-time Person Re-Identification system using a Vision Transformer (ViT) backbone, YOLOv8 for person detection, and FAISS for fast cosine similarity-based retrieval. Deployed via Streamlit for live querying.
 
 ---
 
