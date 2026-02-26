@@ -42,19 +42,19 @@ Confidence Percentage:
 ---
 
 ## Pipeline Diagram
-"""
+```
 Input Image
-    ↓
+↓
 YOLOv8 → Crop Person
-    ↓
+↓
 ViT (TransReID) → 768-dim Feature Embedding
-    ↓
+↓
 Cosine Similarity with Gallery Embeddings
-    ↓
+↓
 Top-K Similar Persons
-    ↓
+↓
 Streamlit Display
-"""
+```
 ---
 
 ## Installation & Usage
